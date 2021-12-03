@@ -3,6 +3,7 @@ import dendro_formulas
 
 print('Dendrometr 1.0.1')
 print('')
+print('Hi User!')
 
 
 class start:
