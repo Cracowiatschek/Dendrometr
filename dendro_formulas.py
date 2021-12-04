@@ -116,12 +116,7 @@ class Vsek:
 
 class sekVHub:
     sek = 0
-    def __init__(self, sek):
-        print('Instrukcja')
-        print('1. Wpisz numer sekcji')
-        print('2. Sekcje należy numerować od 1 wzwyż')
-        print('3. Uzupełnij średnicę - d1/2 i  długość - h sekcji')
-        print('4. Jeśli chcesz zakończyć pomiar w numerze sekcji wpisz 0')
+    def __init__(self, sek, d1_2, h):
         Vcdrz = 0
         sek = int(input('Wpisz numer sekcji: '))
         while sek >= 0:
@@ -141,18 +136,18 @@ class sekVHub:
 
 
 class sekVSmal:
-    def __init__(self, sek):
+    def __init__(self, sek, d0, dl, h):
         Vcdrz = 0
-        sek = int(input('Wpisz numer sekcji: '))
+        sek = int(input('Write number of section: '))
         while sek >= 0:
             if sek > 0:
-                d0 = int(input('Podaj d0 sekcji: '))
-                dl = int(input('Podaj dl sekcji: '))
-                h = int(input('Podaj h sekcji: '))
+                d0 = int(input('Write base diameter of section = d0 (cm): '))
+                dl = int(input('Write top diameter od section = dl (cm): '))
+                h = int(input('Write lenght of section = h (m): '))
                 V = (((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h
                 Vcdrz += V
                 print(Vcdrz)
-                sek = int(input('Wpisz numer sekcji: '))
+                sek = int(input('Write number of section: '))
             elif sek == 0:
                 print('V = ' + str(Vcdrz) + 'm3')
                 break
