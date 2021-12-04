@@ -4,7 +4,8 @@ import cmath
 class VHub:
     def __init__(self, d1_2, h):
         if d1_2 >= 0 and h > 0:
-            print('V = ' + str(((cmath.pi * d1_2 ** 2) / 40000) * h) + ' m3')
+            V = round((((cmath.pi * d1_2 ** 2) / 40000) * h), 4)
+            print('V = ' + str(V) + ' m3')
         else:
             print('Error: corect d1_2')
 
@@ -13,9 +14,8 @@ class VHub:
 class VSmal:
     def __init__(self, d0, dl, h):
         if d0 >= dl and d0 >= 0 and h > 0:
-            print('V = ' + str(
-                (((cmath.pi * d0 ** 2) / 40000) +
-                 ((cmath.pi * dl ** 2) / 40000)) / 2 * h) + ' m3')
+            V = round(((((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h), 4)
+            print('V = ' + str(V) + ' m3')
         else:
             print('Error: corect d0/dl')
 
@@ -28,9 +28,8 @@ class VSmal:
 class VHoss:
     def __init__(self, d1_3, dl, h):
         if d1_3 >= dl and d1_3 > 0 and h > 0:
-            print('V = ' + str(
-                ((3 * (cmath.pi * d1_3 ** 2) / 40000) +
-                 ((cmath.pi * dl ** 2) / 40000)) / 4 * h) + ' m3')
+            V = round((((3 * (cmath.pi * d1_3 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 4 * h), 4)
+            print('V = ' + str(V) + ' m3')
         else:
             print('Error: corect d1_3/dl')
 
@@ -105,7 +104,7 @@ class Dg:
         while tree_id >= 0:
             if tree_id > 0:
                 k = float(input('Write bark thickness (cm): '))
-                d = float(input('Write diameter on 1,3 m height of tree: ')) - k
+                d = float(input('Write diameter (with bark) on 1,3 m height of tree (cm): ')) - k
                 g = (cmath.pi * d ** 2) / 40000
                 local_g.append(g)
                 print(local_g)
@@ -114,6 +113,32 @@ class Dg:
                 g = round((sum(local_g) / len(local_g)), 4)
                 print('Dg = ' + str(g) + ' m2')
                 break
+            else:
+                print('Error')
+                break
 
 
-#print(Dg(tree_id=1))
+class HL:
+    def __init__(self, tree_id):
+        tree_id = int(input('Write tree_id: '))
+        local_g = []
+        local_gh = []
+        while tree_id >= 0:
+            if tree_id > 0:
+                k = float(input('Write bark thickness (cm): '))
+                d = float(input('Write diameter (with bark) on 1,3 m height of tree (cm): ')) - k
+                h = float(input('Write height of tree (m): '))
+                g = (cmath.pi * d ** 2) / 40000
+                local_g.append(g)
+                local_gh.append(g * h)
+                tree_id = int(input('Write tree_id: '))
+            elif tree_id == 0:
+                Lorey = round((sum(local_gh) / sum(local_g)), 4)
+                print('HL = ' + str(Lorey) + ' m')
+                break
+            else:
+                print('Error')
+                break
+
+
+print(HL(tree_id=1))
