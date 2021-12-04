@@ -99,7 +99,6 @@ class sekVSmal:
 
 class Dg:
     def __init__(self, tree_id):
-        tree_id = int(input('Write tree_id: '))
         local_g = []
         while tree_id >= 0:
             if tree_id > 0:
@@ -120,7 +119,6 @@ class Dg:
 
 class HL:
     def __init__(self, tree_id):
-        tree_id = int(input('Write tree_id: '))
         local_g = []
         local_gh = []
         while tree_id >= 0:
@@ -141,4 +139,4 @@ class HL:
                 break
 
 
-print(HL(tree_id=1))
+#print(HL(tree_id=1))
