@@ -59,7 +59,7 @@ class main:
                 print('Instruction')
                 print('1. Write number of section')
                 print('2. Section must be number from 1')
-                print('3. Write diameter in half of section - d1/2 and lenght of section - h')
+                print('3. Write diameter in half of section = d1/2 and lenght of section = h')
                 print('4. If you want to end of measurement write 0 in section')
                 print(dendro_formulas.sekVHub(sek='Run', d1_2=0, h=0))
                 module = 'B'
@@ -67,7 +67,7 @@ class main:
                 print('Instruction')
                 print('1. Write number of section')
                 print('2. Section must be number from 1')
-                print('3. Write base diameter of section - d0 (cm), write top diameter of section = dl (cm) '
+                print('3. Write base diameter of section = d0 (cm), write top diameter of section = dl (cm) '
                       'and lenght of section = h (m)')
                 print('4. If you want to end of measurement write 0 in section')
                 print(dendro_formulas.sekVSmal(sek='Run', d0=0, dl=0, h=0))
