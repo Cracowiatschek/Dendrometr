@@ -6,7 +6,7 @@ class VHub:
         if d1_2 >= 0 and h > 0:
             print('V = ' + str(((cmath.pi * d1_2 ** 2) / 40000) * h) + ' m3')
         else:
-            print('Error: korekta d1_2')
+            print('Error: corect d1_2')
 
 
 # print(VHub(d1_2=int(input('Wpisz d1/2 (cm): ')), h=int(input('Wpisz h (m): '))))
@@ -17,7 +17,7 @@ class VSmal:
                 (((cmath.pi * d0 ** 2) / 40000) +
                  ((cmath.pi * dl ** 2) / 40000)) / 2 * h) + ' m3')
         else:
-            print('Error: korekta d0/dl')
+            print('Error: corect d0/dl')
 
 
 # print(VSmal(d0=int(input('Wpisz d0 (cm): ')),
@@ -32,7 +32,7 @@ class VHoss:
                 ((3 * (cmath.pi * d1_3 ** 2) / 40000) +
                  ((cmath.pi * dl ** 2) / 40000)) / 4 * h) + ' m3')
         else:
-            print('Error: korekcja d1_3/dl')
+            print('Error: corect d1_3/dl')
 
 
 # print(VHoss(d1_3=int(input('Wpisz d1_3 (cm): ')),
@@ -42,12 +42,12 @@ class VHoss:
 class VNew:
     def __init__(self, d0, d1_2, dl, h):
         if d0 >= d1_2 >= dl and d0 > 0 and h > 0:
-            print('V = ' + str(
-                (((cmath.pi * d0 ** 2) / 40000) +
-                 (4 * (cmath.pi * d1_2 ** 2) / 40000) +
-                 ((cmath.pi * dl ** 2) / 40000)) / 6 * h) + ' m3')
+            V = round(((((cmath.pi * d0 ** 2) / 40000) +
+                (4 * (cmath.pi * d1_2 ** 2) / 40000) +
+                ((cmath.pi * dl ** 2) / 40000)) / 6 * h), 4)
+            print('V = ' + str(V) + ' m3')
         else:
-            print('Error: korekcja d0/d1_3/dl')
+            print('Error: corect d0/d1_3/dl')
 
 
 # print(VNew(d0=int(input('Wpisz 0 (cm): ')),
@@ -57,7 +57,6 @@ class VNew:
 
 
 class sekVHub:
-    sek = 0
     def __init__(self, sek, d1_2, h):
         Vcdrz = 0
         sek = int(input('Write number of section: '))
@@ -70,6 +69,7 @@ class sekVHub:
                 print(Vcdrz)
                 sek = int(input('Write number of section: '))
             elif sek == 0:
+                Vcdrz = round(Vcdrz, 4)
                 print('V = ' + str(Vcdrz) + 'm3')
                 break
             else:
@@ -91,8 +91,29 @@ class sekVSmal:
                 print(Vcdrz)
                 sek = int(input('Write number of section: '))
             elif sek == 0:
-                print('V = ' + str(Vcdrz) + 'm3')
+                print('V = ' + str(round(Vcdrz, 4)) + 'm3')
                 break
             else:
                 print('Error')
                 break
+
+
+class Dg:
+    def __init__(self, tree_id):
+        tree_id = int(input('Write tree_id: '))
+        local_g = []
+        while tree_id >= 0:
+            if tree_id > 0:
+                k = float(input('Write bark thickness (cm): '))
+                d = float(input('Write diameter on 1,3 m height of tree: ')) - k
+                g = (cmath.pi * d ** 2) / 40000
+                local_g.append(g)
+                print(local_g)
+                tree_id = int(input('Write tree_id: '))
+            elif tree_id == 0:
+                g = round((sum(local_g) / len(local_g)), 4)
+                print('Dg = ' + str(g) + ' m2')
+                break
+
+
+#print(Dg(tree_id=1))
