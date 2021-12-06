@@ -1,6 +1,6 @@
 import dendro_formulas
 
-print('Dendrometr 1.0.1')
+print('Dendrometr 1.0.2')
 print('')
 print('Hi User!')
 print('')
@@ -28,24 +28,58 @@ class main:
             print('X. Return')
             mode = str(input('Choose model: '))
             if mode == 'A':
-                print(dendro_formulas.VHub(d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
-                                           h=int(input('Write lenght of tree = h (m): '))))
+                bark = input('Do you measure diameter with bark? [Y / N]: ')
+                if bark == 'Y':
+                    print(dendro_formulas.VHub(k=int(input('Write thicness of bark (cm): ')),
+                                               d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
+                                               h=int(input('Write lenght of tree = h (m): '))))
+                elif bark == 'N':
+                    print(dendro_formulas.VHub(d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
+                                               k=0,
+                                               h=int(input('Write lenght of tree = h (m): '))))
                 module = 'A'
             elif mode == 'B':
-                print(dendro_formulas.VSmal(d0=int(input('Write base diameter = d0 (cm): ')),
-                                            dl=int(input('Write top diameter = dl (cm): ')),
-                                            h=int(input('Write lenght of tree = h (m): '))))
+                bark = input('Do you measure diameter with bark? [Y / N]: ')
+                if bark == 'Y':
+                    print(dendro_formulas.VSmal(k0=int(input('Write thicness of bark for d0 (cm): ')),
+                                                d0=int(input('Write base diameter = d0 (cm): ')),
+                                                kl=int(input('Write thicness of bark for dl (cm): ')),
+                                                dl=int(input('Write top diameter = dl (cm): ')),
+                                                h=int(input('Write lenght of tree = h (m): '))))
+                elif bark == 'N':
+                    print(dendro_formulas.VSmal(k0=0,
+                                                d0=int(input('Write base diameter = d0 (cm): ')),
+                                                kl=0,
+                                                dl=int(input('Write top diameter = dl (cm): ')),
+                                                h=int(input('Write lenght of tree = h (m): '))))
                 module = 'A'
             elif mode == 'C':
-                print(dendro_formulas.VHoss(d1_3=int(input('Write diameter in 1/3 lenght of tree = d1/3 (cm): ')),
-                                            dl=int(input('Write top diameter = dl (cm): ')),
-                                            h=int(input('Write lenght of tree = h (m): '))))
+                bark = input('Do you measure diameter with bark? [Y / N]: ')
+                if bark == 'Y':
+                    print(dendro_formulas.VHoss(k1_3=int(input('Write thicness of bark for d1/3 (cm): ')),
+                                                d1_3=int(input('Write diameter in 1/3 lenght of tree = d1/3 (cm): ')),
+                                                kl=int(input('Write thicness of bark for dl (cm): ')),
+                                                dl=int(input('Write top diameter = dl (cm): ')),
+                                                h=int(input('Write lenght of tree = h (m): '))))
                 module = 'A'
             elif mode == 'D':
-                print(dendro_formulas.VNew(d0=int(input('Write diameter in base of tree = 0 (cm): ')),
-                                           d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
-                                           dl=int(input('Write top diameter = dl (cm): ')),
-                                           h=int(input('Write lenght of tree = h (m): '))))
+                bark = input('Do you measure diameter with bark? [Y / N]: ')
+                if bark == 'Y':
+                    print(dendro_formulas.VNew(k0=int(input('Write thicness of bark for d0 (cm): ')),
+                                               d0=int(input('Write diameter in base of tree = 0 (cm): ')),
+                                               k1_2=int(input('Write thicness of bark for d1/2 (cm): ')),
+                                               d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
+                                               kl=int(input('Write thicness of bark for dl (cm): ')),
+                                               dl=int(input('Write top diameter = dl (cm): ')),
+                                               h=int(input('Write lenght of tree = h (m): '))))
+                elif bark == 'N':
+                    print(dendro_formulas.VNew(k0=0,
+                                               d0=int(input('Write diameter in base of tree = 0 (cm): ')),
+                                               k1_2=0,
+                                               d1_2=int(input('Write diameter in half lenght of tree = d1/2 (cm): ')),
+                                               kl=0,
+                                               dl=int(input('Write top diameter = dl (cm): ')),
+                                               h=int(input('Write lenght of tree = h (m): '))))
                 module = 'A'
             elif mode == 'X':
                 module = 'Run'
@@ -66,7 +100,7 @@ class main:
                 print('3. Write diameter in half of section - d1/2, bark thickness (cm) and '
                       'lenght of section - h')
                 print('4. If you want to end of measurement, write 0 in section')
-                print(dendro_formulas.sekVHub(sek='Run', d1_2=0, h=0))
+                print(dendro_formulas.sekVHub(sek='Run'))
                 module = 'B'
             elif mode == 'B':
                 print('Instruction')
@@ -75,7 +109,7 @@ class main:
                 print('3. Write base diameter of section - d0 (cm), write top diameter of section = dl (cm), '
                       'bark thickness (cm) and lenght of section = h (m)')
                 print('4. If you want to end of measurement, write 0 in section')
-                print(dendro_formulas.sekVSmal(sek='Run', d0=0, dl=0, h=0))
+                print(dendro_formulas.sekVSmal(sek='Run'))
                 module = 'B'
             elif mode == 'X':
                 module = 'Run'
@@ -92,7 +126,7 @@ class main:
             print('X. Return')
             run = input('Write A or X: ')
             if run == 'A':
-                print(dendro_formulas.Dg(tree_id=int(input('Write tree_id: '))))
+                print(dendro_formulas.Dg(measurement=input('Do you write first measurement? [Y / N]: ')))
                 module = 'C'
             elif run == 'X':
                 module = 'Run'
@@ -112,7 +146,7 @@ class main:
             print('X. Return')
             run = (input('Write A or X: '))
             if run == 'A':
-                print(dendro_formulas.HL(tree_id=int((input('Write tree_id: ')))))
+                print(dendro_formulas.HL(measurement=(input('Do you write first measurement [Y / N]: '))))
                 module = 'D'
             elif run == 'X':
                 module = 'Run'

@@ -2,20 +2,20 @@ import cmath
 
 
 class VHub:
-    def __init__(self, d1_2, h):
+    def __init__(self, d1_2, k, h):
         if d1_2 >= 0 and h > 0:
-            V = round((((cmath.pi * d1_2 ** 2) / 40000) * h), 4)
-            print('V = ' + str(V) + ' m3')
+            self.V = round((((cmath.pi * (d1_2 - k) ** 2) / 40000) * h), 4)
+            print('V = ' + str(self.V) + ' m3')
         else:
             print('Error: corect d1_2')
 
 
 # print(VHub(d1_2=int(input('Wpisz d1/2 (cm): ')), h=int(input('Wpisz h (m): '))))
 class VSmal:
-    def __init__(self, d0, dl, h):
+    def __init__(self, d0, k0, dl, kl, h):
         if d0 >= dl and d0 >= 0 and h > 0:
-            V = round(((((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h), 4)
-            print('V = ' + str(V) + ' m3')
+            self.V = round(((((cmath.pi * (d0 - k0) ** 2) / 40000) + ((cmath.pi * (dl - kl) ** 2) / 40000)) / 2 * h), 4)
+            print('V = ' + str(self.V) + ' m3')
         else:
             print('Error: corect d0/dl')
 
@@ -26,10 +26,11 @@ class VSmal:
 
 
 class VHoss:
-    def __init__(self, d1_3, dl, h):
+    def __init__(self, d1_3, k1_3, dl, kl, h):
         if d1_3 >= dl and d1_3 > 0 and h > 0:
-            V = round((((3 * (cmath.pi * d1_3 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 4 * h), 4)
-            print('V = ' + str(V) + ' m3')
+            self.V = round((((3 * (cmath.pi * (d1_3 - k1_3) ** 2) / 40000) +
+                             ((cmath.pi * (dl - kl) ** 2) / 40000)) / 4 * h), 4)
+            print('V = ' + str(self.V) + ' m3')
         else:
             print('Error: corect d1_3/dl')
 
@@ -39,12 +40,11 @@ class VHoss:
 #             h=int(input('Wpisz h (m): '))))
 
 class VNew:
-    def __init__(self, d0, d1_2, dl, h):
+    def __init__(self, d0, k0, d1_2, k1_2, dl, kl, h):
         if d0 >= d1_2 >= dl and d0 > 0 and h > 0:
-            V = round(((((cmath.pi * d0 ** 2) / 40000) +
-                (4 * (cmath.pi * d1_2 ** 2) / 40000) +
-                ((cmath.pi * dl ** 2) / 40000)) / 6 * h), 4)
-            print('V = ' + str(V) + ' m3')
+            self.V = round(((((cmath.pi * (d0 - k0) ** 2) / 40000) + (4 * (cmath.pi * (d1_2 - k1_2) ** 2) / 40000) +
+                             ((cmath.pi * (dl - kl) ** 2) / 40000)) / 6 * h), 4)
+            print('V = ' + str(self.V) + ' m3')
         else:
             print('Error: corect d0/d1_3/dl')
 
@@ -56,20 +56,20 @@ class VNew:
 
 
 class sekVHub:
-    def __init__(self, sek, d1_2, h):
-        Vcdrz = 0
+    def __init__(self, sek):
+        self.Vcdrz = 0
         sek = int(input('Write number of section: '))
         while sek >= 0:
             if sek > 0:
                 d1_2 = int(input('Write diameter in half of section = d1/2 (cm): '))
                 h = int(input('Write lenght of section = h (m): '))
-                V = ((cmath.pi * d1_2 ** 2) / 40000) * h
-                Vcdrz += V
-                print(Vcdrz)
+                self.V = ((cmath.pi * d1_2 ** 2) / 40000) * h
+                self.Vcdrz += self.V
+                print(self.Vcdrz)
                 sek = int(input('Write number of section: '))
             elif sek == 0:
-                Vcdrz = round(Vcdrz, 4)
-                print('V = ' + str(Vcdrz) + 'm3')
+                self.Vcdrz = round(self.Vcdrz, 4)
+                print('V = ' + str(self.Vcdrz) + 'm3')
                 break
             else:
                 print('Error')
@@ -77,20 +77,20 @@ class sekVHub:
 
 
 class sekVSmal:
-    def __init__(self, sek, d0, dl, h):
-        Vcdrz = 0
+    def __init__(self, sek):
+        self.Vcdrz = 0
         sek = int(input('Write number of section: '))
         while sek >= 0:
             if sek > 0:
                 d0 = int(input('Write base diameter of section = d0 (cm): '))
                 dl = int(input('Write top diameter od section = dl (cm): '))
                 h = int(input('Write lenght of section = h (m): '))
-                V = (((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h
-                Vcdrz += V
-                print(Vcdrz)
+                self.V = (((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h
+                self.Vcdrz += self.V
+                print(self.Vcdrz)
                 sek = int(input('Write number of section: '))
             elif sek == 0:
-                print('V = ' + str(round(Vcdrz, 4)) + 'm3')
+                print('V = ' + str(round(self.Vcdrz, 4)) + 'm3')
                 break
             else:
                 print('Error')
@@ -98,17 +98,17 @@ class sekVSmal:
 
 
 class Dg:
-    def __init__(self, tree_id):
+    def __init__(self, measurement):
         local_g = []
-        while tree_id >= 0:
-            if tree_id > 0:
+        while measurement == 'Y' or measurement == 'N':
+            if measurement == 'Y':
                 k = float(input('Write bark thickness (cm): '))
                 d = float(input('Write diameter (with bark) on 1,3 m height of tree (cm): ')) - k
                 g = (cmath.pi * d ** 2) / 40000
                 local_g.append(g)
                 print(local_g)
-                tree_id = int(input('Write tree_id: '))
-            elif tree_id == 0:
+                measurement = input('Do you write next measurement? [Y / N]: ')
+            elif measurement == 'N':
                 g = round((sum(local_g) / len(local_g)), 4)
                 print('Dg = ' + str(g) + ' m2')
                 break
@@ -118,25 +118,27 @@ class Dg:
 
 
 class HL:
-    def __init__(self, tree_id):
+    def __init__(self, measurement):
         local_g = []
         local_gh = []
-        while tree_id >= 0:
-            if tree_id > 0:
+        while measurement == 'Y' or measurement == 'N':
+            if measurement == 'Y':
                 k = float(input('Write bark thickness (cm): '))
                 d = float(input('Write diameter (with bark) on 1,3 m height of tree (cm): ')) - k
                 h = float(input('Write height of tree (m): '))
                 g = (cmath.pi * d ** 2) / 40000
                 local_g.append(g)
                 local_gh.append(g * h)
-                tree_id = int(input('Write tree_id: '))
-            elif tree_id == 0:
-                Lorey = round((sum(local_gh) / sum(local_g)), 4)
-                print('HL = ' + str(Lorey) + ' m')
+                print('local_g = ' + str(local_g))
+                print('local_gh = ' + str(local_gh))
+                measurement = input('Do you write next measurement? [Y / N]: ')
+            elif measurement == 'N':
+                self.Lorey = round((sum(local_gh) / sum(local_g)), 4)
+                print('HL = ' + str(self.Lorey) + ' m')
                 break
             else:
                 print('Error')
                 break
 
 
-#print(HL(tree_id=1))
+# print(HL(tree_id=1))
