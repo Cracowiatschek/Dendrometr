@@ -32,6 +32,3 @@ class HL:
             else:
                 print('Error')
                 break
-
-
-print(HL())
