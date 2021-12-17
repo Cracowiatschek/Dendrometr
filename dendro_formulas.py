@@ -1,23 +1,8 @@
 import cmath
 
 
-class VHub:
-    def __init__(self, d1_2, k, h):
-        if d1_2 >= 0 and h > 0:
-            self.V = round((((cmath.pi * (d1_2 - k) ** 2) / 40000) * h), 4)
-            print('V = ' + str(self.V) + ' m3')
-        else:
-            print('Error: corect d1_2')
 
 
-# print(VHub(d1_2=int(input('Wpisz d1/2 (cm): ')), h=int(input('Wpisz h (m): '))))
-class VSmal:
-    def __init__(self, d0, k0, dl, kl, h):
-        if d0 >= dl and d0 >= 0 and h > 0:
-            self.V = round(((((cmath.pi * (d0 - k0) ** 2) / 40000) + ((cmath.pi * (dl - kl) ** 2) / 40000)) / 2 * h), 4)
-            print('V = ' + str(self.V) + ' m3')
-        else:
-            print('Error: corect d0/dl')
 
 
 # print(VSmal(d0=int(input('Wpisz d0 (cm): ')),
@@ -32,7 +17,7 @@ class VHoss:
                              ((cmath.pi * (dl - kl) ** 2) / 40000)) / 4 * h), 4)
             print('V = ' + str(self.V) + ' m3')
         else:
-            print('Error: corect d1_3/dl')
+            print('Error: correct d1_3/dl')
 
 
 # print(VHoss(d1_3=int(input('Wpisz d1_3 (cm): ')),
@@ -46,7 +31,7 @@ class VNew:
                              ((cmath.pi * (dl - kl) ** 2) / 40000)) / 6 * h), 4)
             print('V = ' + str(self.V) + ' m3')
         else:
-            print('Error: corect d0/d1_3/dl')
+            print('Error: correct d0/d1_3/dl')
 
 
 # print(VNew(d0=int(input('Wpisz 0 (cm): ')),
@@ -60,14 +45,22 @@ class sekVHub:
         self.Vcdrz = 0
         sek = int(input('Write number of section: '))
         while sek >= 0:
+            d = []
+            ht = []
             if sek > 0:
                 d1_2 = int(input('Write diameter in half of section = d1/2 (cm): '))
-                h = int(input('Write lenght of section = h (m): '))
+                h = int(input('Write length of section = h (m): '))
+                d.append(d1_2)
+                ht.append(h)
                 self.V = ((cmath.pi * d1_2 ** 2) / 40000) * h
                 self.Vcdrz += self.V
                 print(self.Vcdrz)
                 sek = int(input('Write number of section: '))
             elif sek == 0:
+                self.id = 0
+#                while self.id < len(d) or self.id < len(ht):
+#                    print(str(self.id+1) + str(d[self.id]) + ' cm; ' + str(ht[self.id]))
+#                    self.id += 1
                 self.Vcdrz = round(self.Vcdrz, 4)
                 print('V = ' + str(self.Vcdrz) + 'm3')
                 break
@@ -84,7 +77,7 @@ class sekVSmal:
             if sek > 0:
                 d0 = int(input('Write base diameter of section = d0 (cm): '))
                 dl = int(input('Write top diameter od section = dl (cm): '))
-                h = int(input('Write lenght of section = h (m): '))
+                h = int(input('Write length of section = h (m): '))
                 self.V = (((cmath.pi * d0 ** 2) / 40000) + ((cmath.pi * dl ** 2) / 40000)) / 2 * h
                 self.Vcdrz += self.V
                 print(self.Vcdrz)

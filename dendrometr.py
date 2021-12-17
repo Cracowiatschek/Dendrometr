@@ -1,6 +1,6 @@
-import dendro_formulas
+import dendroformulas
 
-print('Dendrometr 1.0.2')
+print('Dendrometr 1.0.3')
 print('')
 print('Hi User!')
 print('')

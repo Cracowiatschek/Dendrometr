@@ -5,7 +5,7 @@ class VSekHub:
     def __init__(self):
         sek = str(input('Do you want to write first section? : '))
         self.Vcdrz = 0
-        self.VcdrzList = []  #list of
+        self.VcdrzList = []  # list of
         while sek == 'T' or sek == 'N':
             dlist = []
             hlist = []
@@ -30,6 +30,3 @@ class VSekHub:
             else:
                 print('Error')
                 break
-
-
-print(VSekHub())
